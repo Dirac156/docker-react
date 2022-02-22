@@ -1,0 +1,12 @@
+# required sudo permission
+language: generic
+sudo: required
+services:
+  - docker
+
+# some series of set up before we deploy or run test
+before_install:
+  - docker build -t diracmmd/docker-react -f Dockerfile.dev .
+
+script:
+  - docker run -e CI=true diracmmd/docker-react npm run test
